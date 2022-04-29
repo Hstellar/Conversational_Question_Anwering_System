@@ -23,7 +23,7 @@ We have trained the model with the below config:
 --fp16 \
 --do_lower_case \
 
-on **1x Tesla V100** in **8 Hours** and achieved **82.1 F1-score** on dev-set. 
+On **1x Tesla V100** for **8 Hours** and achieved **82.1 F1-Score** on dev-set.
 
 
 ## Requirement
@@ -44,3 +44,4 @@ or edit and run *run.sh*
 for calculating F1-score, use *evaluate-v1.0.py*
 > python evaluate-v1.0.py --data-file <path_to_coqa-dev-v1.0.json> --pred-file <path_to_predictions.json>
 
+- We acknowledge the support of Google Developers Expert program for providing GCP credits to carry out the experiments.
