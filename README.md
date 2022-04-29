@@ -1,5 +1,5 @@
 # Conversational Question Anwering System
-This repository contains various methods explored for Conversational Q&A System. on [CoQA Dataset] (https://stanfordnlp.github.io/coqa/). 
+This repository contains various methods explored for Conversational Q&A System. on [CoQA Dataset](https://stanfordnlp.github.io/coqa/). 
 
 ## Methods
 FlowQA: Implemented LSTM and GRU-based Flow-QA architecture
