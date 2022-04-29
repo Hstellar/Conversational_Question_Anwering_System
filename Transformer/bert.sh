@@ -1,0 +1,20 @@
+python run_coqa.py \
+--type bert \
+--bert_model 'bert-base-uncased' \
+--do_train \
+--do_predict \
+--history_len 0 \
+--num_train_epochs 2.0 \
+--max_seq_length 512 \
+--doc_stride 128 \
+--max_query_length 64 \
+--output_dir tmp2 \
+--train_file coqa-train-v1.0.json \
+--predict_file coqa-dev-v1.0.json \
+--train_batch_size 12 \
+--learning_rate 3e-5 \
+--warmup_proportion 0.1 \
+--max_grad_norm -1 \
+--weight_decay 0.01 \
+--fp16 \
+--do_lower_case \
