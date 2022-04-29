@@ -1,3 +1,5 @@
+# BERT for CoQA
+
 ## Introduction
 This code is example demonstrating how to apply [Bert](https://arxiv.org/abs/1810.04805) on [CoQA Challenge](https://stanfordnlp.github.io/coqa/).
 
@@ -43,5 +45,5 @@ or edit and run *run.sh*
 for calculating F1-score, use *evaluate-v1.0.py*
 > python evaluate-v1.0.py --data-file <path_to_coqa-dev-v1.0.json> --pred-file <path_to_predictions.json>
 
-# Acknowledgement
+## Acknowledgement
 We acknowledge the support of Google Developers Expert program for providing GCP credits to carry out the experiments.
