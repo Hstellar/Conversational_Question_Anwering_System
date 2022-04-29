@@ -2,9 +2,9 @@
 This repository contains various methods explored for Conversational Q&A System on [CoQA Dataset](https://stanfordnlp.github.io/coqa/). 
 
 ## Methods
-FlowQA: Implemented LSTM and GRU-based Flow-QA architecture
-GraphFlow: a GNN based architecture with various embeddings
-Transformer: BERT base and BERT large architectures
+- FlowQA: Implemented LSTM and GRU-based Flow-QA architecture
+- GraphFlow: a GNN based architecture with various embeddings
+- Transformer: BERT base and BERT large architectures
 
 In total we performed **13 different experiments** and found Transformer based architecture gives the best F1 score on the validation set.
  
