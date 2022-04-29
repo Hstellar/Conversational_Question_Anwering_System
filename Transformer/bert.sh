@@ -1,9 +1,9 @@
 python run_coqa.py \
 --type bert \
---bert_model 'bert-base-uncased' \
+--bert_model 'bert-large-uncased-whole-word-masking-finetuned-squad' \
 --do_train \
 --do_predict \
---history_len 0 \
+--history_len 2 \
 --num_train_epochs 2.0 \
 --max_seq_length 512 \
 --doc_stride 128 \
