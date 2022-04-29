@@ -418,10 +418,6 @@ def convert_examples_to_features(examples, tokenizer, max_seq_length,
                 example.rational_end_position + 1] - 1
         else:
             tok_r_end_position = len(all_doc_tokens) - 1
-        # rational part end
-
-        # if tok_r_end_position is None:
-        #     print('DEBUG')
 
         if cls_idx < 3:
             tok_start_position, tok_end_position = 0, 0
@@ -461,22 +457,13 @@ def convert_examples_to_features(examples, tokenizer, max_seq_length,
             token_is_max_context = {}
             segment_ids = []
 
-            # cur_id = 2 - query_tokens.count('[SEP]')
-
-            # assert cur_id >= 0
-
             tokens.append("[CLS]")
             segment_ids.append(0)
             for token in query_tokens:
                 tokens.append(token)
                 segment_ids.append(0)
-                # if token == '[SEP]':
-                #     cur_id += 1
             tokens.append("[SEP]")
             segment_ids.append(0)
-            # cur_id += 1
-
-            # assert cur_id <= 3
 
             for i in range(doc_span.length):
                 split_token_index = doc_span.start + i
@@ -528,7 +515,6 @@ def convert_examples_to_features(examples, tokenizer, max_seq_length,
                 doc_offset = len(query_tokens) + 2
                 rational_start_position = tok_r_start_position - doc_start + doc_offset
                 rational_end_position = tok_r_end_position - doc_start + doc_offset
-            # rational_part_end
 
             rational_mask = [0] * len(input_ids)
             if not out_of_span:
@@ -861,24 +847,6 @@ def write_predictions(all_examples, all_features, all_results, n_best_size,
                                      score=pred.score,
                                      cls_idx=pred.cls_idx))
 
-        # if we didn't include the empty option in the n-best, include it
-        # if "" not in seen_predictions:
-        #     nbest.append(
-        #         _NbestPrediction(text=final_text,
-        #                          noanswer_logit=pred.noanswer_logit,
-        #                          cls_idx=pred.cls_idx))
-        # In very rare edge cases we could only have single null prediction.
-        # So we just create a nonce prediction in this case to avoid failure.
-        # if len(nbest) == 1:
-        #     nbest.insert(
-        #         0,
-        #         _NbestPrediction(text="empty",
-        #                          start_logit=0.0,
-        #                          end_logit=0.0))
-
-        # In very rare edge cases we could have no valid predictions. So we
-        # just create a nonce prediction in this case to avoid failure.
-
         if len(nbest) < 1:
             nbest.append(
                 _NbestPrediction(text='unknown',
@@ -888,23 +856,7 @@ def write_predictions(all_examples, all_features, all_results, n_best_size,
         assert len(nbest) >= 1
 
         probs = _compute_softmax([p.score for p in nbest])
-
-        # total_scores = []
-        # cls_scores = []
-        # for entry in nbest:
-        #     total_scores.append(entry.start_logit + entry.end_logit)
-        # for entry in cls_rank:
-        #     cls_scores.append(entry.cls_logit)
-
-        # span_probs = _compute_softmax(total_scores)
-        # cls_probs = _compute_softmax(cls_scores)
         nbest_json = []
-
-        # # two diff nbest: for cls and for answer span
-        # cur_rank, cur_probs, cur_scores = (
-        #     nbest, span_probs,
-        #     total_scores) if cls_rank[0].cls_idx == 3 and len(nbest) > 1 else (
-        #         cls_rank, cls_probs, cls_scores)
 
         for i, entry in enumerate(nbest):
             output = collections.OrderedDict()
@@ -923,17 +875,7 @@ def write_predictions(all_examples, all_features, all_results, n_best_size,
             'turn_id': int(_turn_id),
             'answer': confirm_preds(nbest_json)
         })
-        # if not version_2_with_negative:
-        #     all_predictions[example.qas_id] = nbest_json[0]["text"]
-        # else:
-        #     # predict "" iff the null score - the score of best non-null > threshold
-        #     score_diff = score_null - best_non_null_entry.start_logit - (
-        #         best_non_null_entry.end_logit)
-        #     scores_diff_json[example.qas_id] = score_diff
-        #     if score_diff > null_score_diff_threshold:
-        #         all_predictions[example.qas_id] = ""
-        #     else:
-        #         all_predictions[example.qas_id] = best_non_null_entry.text
+       
         all_nbest_json[example.qas_id] = nbest_json
 
     with open(output_prediction_file, "w") as writer:
@@ -941,11 +883,6 @@ def write_predictions(all_examples, all_features, all_results, n_best_size,
 
     with open(output_nbest_file, "w") as writer:
         writer.write(json.dumps(all_nbest_json, indent=4) + "\n")
-
-    # if version_2_with_negative:
-    #     with open(output_null_log_odds_file, "w") as writer:
-    #         writer.write(json.dumps(scores_diff_json, indent=4) + "\n")
-
 
 def confirm_preds(nbest_json):
     # Do something for some obvious wrong-predictions
