@@ -1,0 +1,11 @@
+tqdm
+requests
+botocore
+apex
+spacy
+numpy
+six
+boto3
+torch
+ptvsd
+transformers

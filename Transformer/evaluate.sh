@@ -1,0 +1,1 @@
+python evaluate.py --data-file coqa-dev-v1.0.json --pred-file ./tmp2/predictions.json
