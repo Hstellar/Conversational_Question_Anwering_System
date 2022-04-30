@@ -5,14 +5,14 @@ We have trained the model with the below config:
 
 python train_CoQA.py --name model_name --epoches 10 --batch_size 2
 
-Achieved f1 score of 77 using Dev data
+Achieved f1 score of 77 using dev data
 
 ## Steps to run the code
 #### Step 1:
 ```shell
 ./download.sh
 ```
---> Run the above command to install the required libraries, download the Glove pre-trained embeddings and  CoQA train and dev data.
+--> Run the above command to install the required libraries, download the Glove pre-trained embeddings, CoQA train and dev data.
 
 #### Step 2:
 preprocess the data files using command:
@@ -24,9 +24,9 @@ run the training code using:
 ```shell
 python train_CoQA.py --name model_name --epoches 10
 ```
-In the name argument we can give the name of the model to be saved.
+In the name argument we can give the name of the model to be saved and other arguments can be explored as well.
 
-## Steps to run the code for Lightweight model using small dataset
+## Steps to run the code for FlowQA model(lightweight) using small dataset
 #### Step 1:
 ```shell
 ./download.sh
