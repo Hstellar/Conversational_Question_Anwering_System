@@ -27,6 +27,10 @@ Run below command to train the model <br>
 	<br>
 Logs(Metrics-F1 score and EM) will be saved in data/
 
+Following 3 model configurations was experimented:<br>
+1)Trained model with BERT and GLoVe embedding. (# of parameters = 2,96,66,554)<br>
+2)Trained model only with GloVe embedding (# of parameters=2,69,00,706)<br>
+3)With Bidirectional - GNN (performs better but computationally expensive, # of parameters = 3,03,87,154)<br>
 
 ## Reference
 Yu Chen, Lingfei Wu, Mohammed J. Zaki. **"Graphflow: Exploiting Conversation Flow with Graph Neural Networks for Conversational Machine Comprehension."** In *Proceedings of the 29th International Joint Conference on Artificial Intelligence (IJCAI 2020)*, Yokohama, Japan, Jul 11-17, 2020.
