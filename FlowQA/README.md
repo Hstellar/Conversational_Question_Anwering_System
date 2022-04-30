@@ -9,18 +9,17 @@ Achieved f1 score of 77 using dev data
 
 ## Steps to run the code
 #### Step 1:
+Install the required libraries, download the Glove pre-trained embeddings, CoQA train and dev data.
 ```shell
 ./download.sh
 ```
-Run the above command to install the required libraries, download the Glove pre-trained embeddings, CoQA train and dev data.
-
 #### Step 2:
-preprocess the data files using command:
+Preprocess the data files.
 ```shell
 python preprocess_CoQA.py
 ```
 #### Step 3:
-run the training code using:
+Run the training code.
 ```shell
 python train_CoQA.py --name model_name --epoches 10
 ```
@@ -28,25 +27,23 @@ In the name argument we can give the name of the model to be saved and other arg
 
 ## Steps to run the code for FlowQA model(lightweight) using small dataset
 #### Step 1:
+Installs all required files for the experiment.
 ```shell
 ./download.sh
 ```
-Installs all required files for the experiment.
 #### Step 2:
+Train_subset.json is a small part of the CoQA train data and is prepared considering the lightweight configuration.
 ```shell
 python preprocess_CoQA.py --train_file train_subset.json --dev_file dev_subset.json
 ```
-train_subset.json is a small part of the CoQA train data and is prepared considering the lightweight configuration.
-
 #### Step 3:
 ```shell
 python train_CoQA.py --name model_name --epoches 4 --valid_file dev_subset.json
 ```
 ####
-
 For the above two methods after training is done, the model and log file are saved in the same directory with the name passed in the "--name" argument.
 
-This can be also run using the collab notebook "FlowQA.ipynb" and the files given 
+This can be also run using the collab notebook "FlowQA.ipynb" and the files given. 
 
 
 References:
