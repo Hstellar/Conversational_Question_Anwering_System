@@ -12,7 +12,7 @@ Achieved f1 score of 77 using dev data
 ```shell
 ./download.sh
 ```
---> Run the above command to install the required libraries, download the Glove pre-trained embeddings, CoQA train and dev data.
+Run the above command to install the required libraries, download the Glove pre-trained embeddings, CoQA train and dev data.
 
 #### Step 2:
 preprocess the data files using command:
@@ -36,7 +36,7 @@ Installs all required files for the experiment.
 ```shell
 python preprocess_CoQA.py --train_file train_subset.json --dev_file dev_subset.json
 ```
--->train_subset.json is a small part of the CoQA train data which has been taken based on instructor's requirements.Similar idea is replicated for valid data as well.
+train_subset.json is a small part of the CoQA train data and is prepared considering the lightweight configuration.
 
 #### Step 3:
 ```shell
@@ -44,7 +44,7 @@ python train_CoQA.py --name model_name --epoches 4 --valid_file dev_subset.json
 ```
 ####
 
-For the above two methods after training the model and log file are saved in the same directory with the name passed in the "--name" argument.
+For the above two methods after training is done, the model and log file are saved in the same directory with the name passed in the "--name" argument.
 
 This can be also run using the collab notebook "FlowQA.ipynb" and the files given 
 
