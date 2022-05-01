@@ -14,10 +14,8 @@ import re
 from collections import Counter
 import string
 
-# +
-# from transformers.models.bert.tokenization_bert import BasicTokenizer
+
 from transformers.tokenization_bert import BasicTokenizer
-# from transformers.models.bert.tokenization_bert import whitespace_tokenize
 from transformers.tokenization_bert import whitespace_tokenize
 
 logger = logging.getLogger(__name__)
