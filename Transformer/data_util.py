@@ -589,28 +589,7 @@ def _improve_answer_span(doc_tokens, input_start, input_end, tokenizer,
                          orig_answer_text):
     """Returns tokenized answer spans that better match the annotated answer."""
 
-    # The SQuAD annotations are character based. We first project them to
-    # whitespace-tokenized words. But then after WordPiece tokenization, we can
-    # often find a "better match". For example:
-    #
-    #   Question: What year was John Smith born?
-    #   Context: The leader was John Smith (1895-1943).
-    #   Answer: 1895
-    #
-    # The original whitespace-tokenized answer will be "(1895-1943).". However
-    # after tokenization, our tokens will be "( 1895 - 1943 ) .". So we can match
-    # the exact answer, 1895.
-    #
-    # However, this is not always possible. Consider the following:
-    #
-    #   Question: What country is the top exporter of electornics?
-    #   Context: The Japanese electronics industry is the lagest in the world.
-    #   Answer: Japan
-    #
-    # In this case, the annotator chose "Japan" as a character sub-span of
-    # the word "Japanese". Since our WordPiece tokenizer does not split
-    # "Japanese", we just use "Japanese" as the annotation. This is fairly rare
-    # in SQuAD, but does happen.
+    # Based on hugging face implementation for Squad improve answer span
     tok_answer_text = " ".join(tokenizer.tokenize(orig_answer_text))
 
     for new_start in range(input_start, input_end + 1):
@@ -625,22 +604,7 @@ def _improve_answer_span(doc_tokens, input_start, input_end, tokenizer,
 def _check_is_max_context(doc_spans, cur_span_index, position):
     """Check if this is the 'max context' doc span for the token."""
 
-    # Because of the sliding window approach taken to scoring documents, a single
-    # token can appear in multiple documents. E.g.
-    #  Doc: the man went to the store and bought a gallon of milk
-    #  Span A: the man went to the
-    #  Span B: to the store and bought
-    #  Span C: and bought a gallon of
-    #  ...
-    #
-    # Now the word 'bought' will have two scores from spans B and C. We only
-    # want to consider the score with "maximum context", which we define as
-    # the *minimum* of its left and right context (the *sum* of left and
-    # right context will always be the same, of course).
-    #
-    # In the example the maximum context for 'bought' would be span C since
-    # it has 1 left context and 3 right context, while span B has 4 left context
-    # and 0 right context.
+    # Based on hugging face implementation for Squad check max context
     best_score = None
     best_span_index = None
     for (span_index, doc_span) in enumerate(doc_spans):
@@ -886,30 +850,7 @@ def confirm_preds(nbest_json):
 def get_final_text(pred_text, orig_text, do_lower_case, verbose_logging=False):
     """Project the tokenized prediction back to the original text."""
 
-    # When we created the data, we kept track of the alignment between original
-    # (whitespace tokenized) tokens and our WordPiece tokenized tokens. So
-    # now `orig_text` contains the span of our original text corresponding to the
-    # span that we predicted.
-    #
-    # However, `orig_text` may contain extra characters that we don't want in
-    # our prediction.
-    #
-    # For example, let's say:
-    #   pred_text = steve smith
-    #   orig_text = Steve Smith's
-    #
-    # We don't want to return `orig_text` because it contains the extra "'s".
-    #
-    # We don't want to return `pred_text` because it's already been normalized
-    # (the SQuAD eval script also does punctuation stripping/lower casing but
-    # our tokenizer does additional normalization like stripping accent
-    # characters).
-    #
-    # What we really want to return is "Steve Smith".
-    #
-    # Therefore, we have to apply a semi-complicated alignment heuristic between
-    # `pred_text` and `orig_text` to get a character-to-character alignment. This
-    # can fail in certain cases in which case we just return `orig_text`.
+    # Based on hugging face implementation for Squad to get final text
 
     def _strip_spaces(text):
         ns_chars = []
