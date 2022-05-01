@@ -289,13 +289,7 @@ def main():
                 "If `do_predict` is True, then `predict_file` must be specified."
             )
 
-#     if os.path.exists(args.output_dir) and os.listdir(
-#             args.output_dir
-#     ) and args.do_train and not args.overwrite_output_dir:
-#         raise ValueError(
-#             "Output directory () already exists and is not empty.")
-#     if not os.path.exists(args.output_dir):
-#         os.makedirs(args.output_dir)
+
 
     if args.local_rank not in [-1, 0]:
         torch.distributed.barrier(
@@ -324,7 +318,6 @@ def main():
 
         # try train_examples
         try:
-#             with open(cached_train_examples_file, "rb") as reader:
             train_examples = load(cached_train_examples_file)
         except:
             logger.info("  No cached file %s", cached_train_examples_file)
@@ -334,15 +327,12 @@ def main():
             if args.local_rank == -1 or torch.distributed.get_rank() == 0:
                 logger.info("  Saving train examples into cached file %s",
                             cached_train_examples_file)
-#                 with open(cached_train_examples_file, "wb") as writer:
                 dump(train_examples, cached_train_examples_file)
 
         print('DEBUG exmp')
-        # exit()
 
         # try train_features
         try:
-#             with open(cached_train_features_file, "rb") as reader:
             train_features = load(cached_train_features_file)
         except:
             logger.info("  No cached file %s", cached_train_features_file)
@@ -357,11 +347,8 @@ def main():
                 logger.info("  Saving train features into cached file %s",
                             cached_train_features_file)
                 dump(train_features, cached_train_features_file)  
-#                 with open(cached_train_features_file, "wb") as writer:
-#                     pickle.dump(train_features, writer, protocol=2)
 
         print('DEBUG feat')
-        # exit()
 
         all_input_ids = torch.tensor([f.input_ids for f in train_features],
                                      dtype=torch.long)
