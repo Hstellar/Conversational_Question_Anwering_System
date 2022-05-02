@@ -138,17 +138,7 @@ def read_coqa_examples(input_file, history_len=2, add_QA_tag=False):
         output = {'word': [], 'offsets': [], 'sentences': []}
 
         for token in parsed_text:
-            #[(token.text,token.idx) for token in parsed_sentence]
             output['word'].append(_str(token.text))
-            # pos = token.tag_
-            # output['pos'].append(pos)
-            # output['pos_id'].append(token2id(pos, POS, 0))
-
-            # ent = 'O' if token.ent_iob_ == 'O' else (token.ent_iob_ + '-' + token.ent_type_)
-            # output['ent'].append(ent)
-            # output['ent_id'].append(token2id(ent, ENT, 0))
-
-            # output['lemma'].append(token.lemma_ if token.lemma_ != '-PRON-' else token.text.lower())
             output['offsets'].append((token.idx, token.idx + len(token.text)))
 
         word_idx = 0
@@ -240,7 +230,6 @@ def read_coqa_examples(input_file, history_len=2, add_QA_tag=False):
         return (start_index, end_index)
 
     """Main stream"""
-#     nlp = spacy.load('en', parser=False)
     nlp = spacy.load("en_core_web_sm")
     with open(input_file, "r", encoding='utf-8') as reader:
         input_data = json.load(reader)["data"]
@@ -259,7 +248,6 @@ def read_coqa_examples(input_file, history_len=2, add_QA_tag=False):
         _datum['annotated_context'] = process(nlp_context)
         _datum['raw_context_offsets'] = get_raw_context_offsets(
             _datum['annotated_context']['word'], context_str)
-        # _datum['qas'] = []
         assert len(datum['questions']) == len(datum['answers'])
         additional_answers = {}
         if 'additional_answers' in datum:
@@ -283,10 +271,6 @@ def read_coqa_examples(input_file, history_len=2, add_QA_tag=False):
             if idx in additional_answers:
                 _qas['additional_answers'] = additional_answers[idx]
 
-            # _qas['annotated_question'] = process(
-            #     nlp(pre_proc(question['input_text'])))
-            # _qas['annotated_answer'] = process(
-            #     nlp(pre_proc(answer['input_text'])))
             _qas['raw_answer'] = answer['input_text']
 
             if _qas['raw_answer'].lower() in ['yes', 'yes.']:
@@ -332,11 +316,6 @@ def read_coqa_examples(input_file, history_len=2, add_QA_tag=False):
                 long_question = long_question.strip()
                 long_questions.append(long_question)
 
-            # long_question = long_question.strip()
-            # _qas['raw_long_question'] = long_question
-            # _qas['annotated_long_question'] = process(
-            #     nlp(pre_proc(long_question)))
-            # _datum['qas'].append(_qas)
             example = CoqaExample(
                 qas_id=_datum['id'] + ' ' + str(_qas['turn_id']),
                 question_text=long_questions,
@@ -655,7 +634,6 @@ def write_predictions(all_examples, all_features, all_results, n_best_size,
             "cls_idx",
         ])
 
-    # all_predictions = collections.OrderedDict()
     all_predictions = []
     all_nbest_json = collections.OrderedDict()
     scores_diff_json = collections.OrderedDict()
