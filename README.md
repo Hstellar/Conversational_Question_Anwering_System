@@ -1,4 +1,4 @@
-# Conversational Question Anwering System
+# Conversational Question Answering System
 This repo contains various methods explored for Conversational Q&A System on [CoQA Dataset](https://stanfordnlp.github.io/coqa/)
 
 ## Methods
