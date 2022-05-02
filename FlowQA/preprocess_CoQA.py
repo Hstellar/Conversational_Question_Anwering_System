@@ -51,9 +51,9 @@ log.info('start data preparing... (using {} threads)'.format(args.threads))
 glove_vocab = load_glove_vocab(wv_file, wv_dim) # return a "set" of vocabulary
 log.info('glove loaded.')
 
-#===============================================================
-#=================== Work on training data =====================
-#===============================================================
+#=======================================================================
+#=================== Work on training and dev data =====================
+#=======================================================================
 
 def proc_train(ith, article):
     rows = []
@@ -219,8 +219,5 @@ def Data_preprocessing(file,datatype,vocab = None,vocab_tag = None,vocab_ent = N
     if(datatype == "train"):
         return vocab,vocab_tag,vocab_ent
     
-#==========================================================
-#=================== Work on dev data =====================
-#==========================================================
 vocab,vocab_tag,vocab_ent = Data_preprocessing(trn_file,"train")
 Data_preprocessing(dev_file,"dev",vocab,vocab_tag,vocab_ent)
