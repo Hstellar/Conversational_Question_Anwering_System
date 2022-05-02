@@ -43,7 +43,7 @@ python train_CoQA.py --name model_name --epoches 4 --valid_file dev_subset.json
 ####
 For the above two methods after training is done, the model and log file are saved in the same directory with the name passed in the "--name" argument.
 
-This can be also run using the collab notebook "FlowQA.ipynb" and the files given. 
+This can be also run using the google collab notebook "FlowQA.ipynb" and uploading the files given in the directory. 
 
 
 References:
