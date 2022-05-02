@@ -1,4 +1,4 @@
-# BERT for CoQA
+# CoQA using BERT based models
 
 ## Introduction
 This code is example demonstrating how to apply [Bert](https://arxiv.org/abs/1810.04805) on [CoQA Challenge](https://stanfordnlp.github.io/coqa/).
