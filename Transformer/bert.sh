@@ -1,8 +1,6 @@
 python run_coqa.py \
 --type bert \
 --bert_model 'bert-large-uncased-whole-word-masking-finetuned-squad' \
---do_train \
---do_predict \
 --history_len 2 \
 --num_train_epochs 2.0 \
 --max_seq_length 512 \
@@ -18,3 +16,5 @@ python run_coqa.py \
 --weight_decay 0.01 \
 --fp16 \
 --do_lower_case \
+--do_train \
+--do_predict \
