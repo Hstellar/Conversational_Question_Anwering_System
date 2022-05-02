@@ -23,7 +23,7 @@ We have trained the model with the below config:
 --max_grad_norm -1 \
 --weight_decay 0.01 \
 --fp16 \
---do_lower_case \
+--do_lower_case
 
 On **1x Tesla V100** for **8 Hours** and achieved **82.1 F1-Score** on dev-set.
 
