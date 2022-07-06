@@ -1,6 +1,6 @@
 gensim==3.5.0
-numpy==1.14.5
-PyYAML==5.1
+numpy==1.23.0
+PyYAML==6.0
 pytorch-pretrained-bert
 pycorenlp
 
